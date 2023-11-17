@@ -10,7 +10,9 @@ import {
 import { configureChains, createConfig } from 'wagmi';
 import { mainnet, sepolia } from 'wagmi/chains';
 import { publicProvider } from 'wagmi/providers/public';
-import { APP_NAME, ENABLE_TESTNETS, WALLET_CONNECT_PROJECT_ID } from './env';
+import { alchemyProvider } from 'wagmi/providers/alchemy'
+
+import { APP_NAME, ENABLE_TESTNETS, ALCHEMY_API_KEY, WALLET_CONNECT_PROJECT_ID } from './env';
 
 export const SupportedChain = {
   MAINNET: mainnet.id,
@@ -23,7 +25,9 @@ export type SupportedChainId = (typeof CHAIN_IDS)[number];
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   CHAINS,
-  [publicProvider()],
+  [
+    alchemyProvider({apiKey: ALCHEMY_API_KEY} ),
+    publicProvider()],
 );
 
 const projectId = WALLET_CONNECT_PROJECT_ID;
