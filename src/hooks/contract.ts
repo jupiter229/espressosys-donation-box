@@ -1,12 +1,9 @@
-import {
-  SupportedChainId,
-} from '@/config';
-import { DONATION_ABI } from '@/config';
+import { DONATION_ABI, SupportedChainId } from '@/config';
 import { DonationContractAddress } from '@/config/contracts';
 import { ChainAddress } from '@/config/types';
+import { getContract } from '@wagmi/core';
 import { Abi, Address, parseAbiItem } from 'viem';
 import { useChainId, useContractRead, usePublicClient } from 'wagmi';
-import { getContract } from '@wagmi/core';
 
 export const useContractConfig = <T extends Abi>(
   chainAdress: ChainAddress,
@@ -31,7 +28,7 @@ export const useDonationContract = () => {
     address: address,
     abi: abi,
   });
-}
+};
 
 export const useTotalDonations = () => {
   const { address, abi } = useDonationContractConfig();
@@ -39,29 +36,33 @@ export const useTotalDonations = () => {
     address: address,
     abi: abi,
     functionName: 'getTotalDonations',
-  })
+  });
 
   return {
     total: data,
     isError,
     isLoading,
   };
-}
+};
 
-export const useUserTotalDonations = (address: Address, userAddress?: Address) => {
-  
+export const useUserTotalDonations = (
+  address: Address,
+  userAddress?: Address,
+) => {
   const publicClient = usePublicClient();
   const getLogs = async () => {
     try {
-      if(address === undefined || userAddress === undefined) return BigInt(0);
+      if (address === undefined || userAddress === undefined) return BigInt(0);
       const res = await publicClient.getLogs({
         address: address,
-        event: parseAbiItem('event DonationTransferred(address sender, uint amount)'),
+        event: parseAbiItem(
+          'event DonationTransferred(address sender, uint amount)',
+        ),
         fromBlock: 3551931n,
       });
 
       const myDonation = res
-        .filter(item => item.args.sender === userAddress)
+        .filter((item) => item.args.sender === userAddress)
         .reduce((acc, item) => {
           const amount = item.args.amount ?? BigInt(0);
           return acc + amount;
@@ -70,7 +71,7 @@ export const useUserTotalDonations = (address: Address, userAddress?: Address) =
       return myDonation;
     } catch (error) {
       // Handle errors (e.g., log them or show a notification)
-      console.error("Error fetching logs:", error);
+      console.error('Error fetching logs:', error);
       return BigInt(0); // or handle errors in a way that makes sense for your application
     }
   };

@@ -1,10 +1,10 @@
+import { twclsx } from '@/utils';
 import '@rainbow-me/rainbowkit/styles.css';
 import { Montserrat } from 'next/font/google';
 import { FC, PropsWithChildren } from 'react';
 import '../styles/globals.css';
-import { Header } from './components/Header'
+import { Header } from './components/Header';
 import { Providers } from './providers';
-import { twclsx } from '@/utils';
 
 const font = Montserrat({ subsets: ['latin'] });
 

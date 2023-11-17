@@ -1,46 +1,46 @@
 export default <const>[
   {
-    "inputs": [],
-    "stateMutability": "nonpayable",
-    "type": "constructor"
+    inputs: [],
+    stateMutability: 'nonpayable',
+    type: 'constructor',
   },
   {
-    "anonymous": false,
-    "inputs": [
+    anonymous: false,
+    inputs: [
       {
-        "indexed": false,
-        "internalType": "address",
-        "name": "sender",
-        "type": "address"
+        indexed: false,
+        internalType: 'address',
+        name: 'sender',
+        type: 'address',
       },
       {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      }
+        indexed: false,
+        internalType: 'uint256',
+        name: 'amount',
+        type: 'uint256',
+      },
     ],
-    "name": "DonationTransferred",
-    "type": "event"
+    name: 'DonationTransferred',
+    type: 'event',
   },
   {
-    "inputs": [],
-    "name": "donate",
-    "outputs": [],
-    "stateMutability": "payable",
-    "type": "function"
+    inputs: [],
+    name: 'donate',
+    outputs: [],
+    stateMutability: 'payable',
+    type: 'function',
   },
   {
-    "inputs": [],
-    "name": "getTotalDonations",
-    "outputs": [
+    inputs: [],
+    name: 'getTotalDonations',
+    outputs: [
       {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
     ],
-    "stateMutability": "view",
-    "type": "function"
-  }
+    stateMutability: 'view',
+    type: 'function',
+  },
 ];

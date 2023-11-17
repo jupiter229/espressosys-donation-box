@@ -1,14 +1,18 @@
-import { FC, ChangeEvent, KeyboardEvent } from 'react';
+import { ChangeEvent, FC, KeyboardEvent } from 'react';
 import { formatUnits } from 'viem';
 
-interface IProps { 
+interface IProps {
   value: string;
   onChange: (value: string) => void;
   userEthBalance?: {
     value: bigint;
-  }; 
+  };
 }
-export const DonationInput: FC<IProps> = ({ value, onChange, userEthBalance }) => {
+export const DonationInput: FC<IProps> = ({
+  value,
+  onChange,
+  userEthBalance,
+}) => {
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value.replace(/[^0-9.,]/g, '');
     onChange(newValue);
@@ -36,7 +40,7 @@ export const DonationInput: FC<IProps> = ({ value, onChange, userEthBalance }) =
       onKeyPress={handleKeyPress}
       max={userEthBalance ? formatUnits(userEthBalance?.value, 18) : '0'}
       min="0"
-      className="w-full p-2 text-dark dark:text-white border rounded-2xl bg-transparent"
+      className="text-dark w-full rounded-2xl border bg-transparent p-2 dark:text-white"
     />
   );
-}
+};
